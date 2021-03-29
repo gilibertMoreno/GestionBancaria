@@ -59,9 +59,11 @@ public class BankServicesImpl implements BankServices {
 	public Bank update(Bank bank) {
 		// TODO Auto-generated method stub
 		Optional<Bank>temporal=bankRepository.findById(bank.getIdBank());
+		
 		if(temporal.isEmpty()) {
 			return null;
 		}else {
+			bank.setRegistrationDate(temporal.get().getRegistrationDate());
 		return bankRepository.save(bank);
 		}
 	}

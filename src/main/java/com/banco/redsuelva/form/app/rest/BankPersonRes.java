@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import com.banco.redsuelva.form.app.dto.CreateBankPersonDto;
 import com.banco.redsuelva.form.app.dto.ListBankPersonDto;
 import com.banco.redsuelva.form.app.entities.BankPerson;
 import com.banco.redsuelva.form.app.service.BankPersonServices;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/bankperson")
 public class BankPersonRes {

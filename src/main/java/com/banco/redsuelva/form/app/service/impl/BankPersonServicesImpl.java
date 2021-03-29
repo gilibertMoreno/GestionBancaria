@@ -37,9 +37,15 @@ public class BankPersonServicesImpl implements BankPersonServices{
 		// TODO Auto-generated method stub
 		Optional<Bank> bank=bankRepository.findById(createBankPerson.getIdBank());
 		Optional<Person> person =personRepository.findById(createBankPerson.getIdPerson());
+		
 		LocalDateTime createDate=LocalDateTime.now();
 		
 		if(!bank.isEmpty()&&!person.isEmpty()) {
+			Optional<BankPerson> bankPerson=bankPersonRepositori.findByBankAndPerson(bank.get(),person.get());
+			if(bankPerson.isPresent()) {
+				return null;
+			}
+			
 			BankPerson temporal=new BankPerson();
 			temporal.setAcount(createBankPerson.getIdBank().toString()+createBankPerson.getIdPerson().toString());
 			temporal.setCreateDate(createDate);
@@ -73,8 +79,8 @@ public class BankPersonServicesImpl implements BankPersonServices{
 			ListBankPersonDto bp=new ListBankPersonDto();
 			bp.setAccount(bankPerson.getAcount());
 			bp.setId(bankPerson.getId());
-			bp.setPersonIdentification(bankPerson.getPerson().getNames());
-			bp.setPersonName(bankPerson.getPerson().getLasName());
+			bp.setPersonIdentification(bankPerson.getPerson().getIdentification());
+			bp.setPersonName(bankPerson.getPerson().getNames());
 			bp.setBankName(bankPerson.getBank().getNameBank());
 			
 			listBankPersonDto.add(bp);
